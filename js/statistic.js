@@ -790,7 +790,7 @@ function showRelatedPapers(keyword) {
             <a href="${paper.url}" target="_blank" class="paper-title">${paper.title}</a>
             <div class="paper-authors">${paper.authors}</div>
             <div class="paper-categories">
-                ${paper.category.map(cat => `<span class="category-tag">${cat}</span>`).join('')}
+                ${paper.category.map(cat => `<span class="category-tag" data-cat="${cat}">${getCategoryLabel(cat)}</span>`).join('')}
             </div>
             <div class="paper-summary">${paper.summary}</div>
         </div>

@@ -976,7 +976,7 @@ function renderCategoryFilter(categories) {
     const count = categoryCounts[category];
     const button = document.createElement('button');
     button.className = `category-button ${category === currentCategory ? 'active' : ''}`;
-    button.innerHTML = `${category}<span class="category-count">${count}</span>`;
+    button.innerHTML = `${getCategoryLabel(category)}<span class="category-count">${count}</span>`;
     button.dataset.category = category;
     button.addEventListener('click', () => {
       filterByCategory(category);
@@ -1354,8 +1354,8 @@ function renderPapers() {
     }
     
     const categoryTags = paper.allCategories ? 
-      paper.allCategories.map(cat => `<span class="category-tag">${cat}</span>`).join('') : 
-      `<span class="category-tag">${paper.category}</span>`;
+      paper.allCategories.map(cat => `<span class="category-tag" data-cat="${cat}">${getCategoryLabel(cat)}</span>`).join('') : 
+      `<span class="category-tag" data-cat="${paper.category}">${getCategoryLabel(paper.category)}</span>`;
     
     // 组合需要高亮的词：关键词 + 文本搜索
     const titleSummaryTerms = [];
@@ -1455,8 +1455,8 @@ function showPaperDetails(paper, paperIndex) {
   const abstractText = paper.details || '';
   
   const categoryDisplay = paper.allCategories ? 
-    paper.allCategories.join(', ') : 
-    paper.category;
+    paper.allCategories.map(cat => `${getCategoryLabel(cat)} (${cat})`).join(', ') : 
+    `${getCategoryLabel(paper.category)} (${paper.category})`;
   
   // 高亮作者（作者过滤 + 文本搜索）
   const modalAuthorTerms = [];
